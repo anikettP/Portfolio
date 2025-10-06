@@ -181,32 +181,17 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Removed custom preview styles */
         .project-image {
             width: 100%;
             height: 300px;
             object-fit: cover;
             border-radius: 0.375rem;
         }
-
-        /* --- ENHANCED SKILL PILL STYLING --- */
+        /* New class for consistent skill tags (used across all projects) */
         .skill-pill {
-            /* Base appearance: dark background, visible green border, subtle glow */
-            @apply px-3 py-1 rounded-full text-xs font-fira transition;
-            background-color: var(--light-navy); /* Base color slightly lighter than project card */
-            border: 1px solid var(--green); /* Solid green border for stronger emphasis */
-            color: var(--lightest-slate); /* Ensure text stands out */
-            box-shadow: 0 0 5px rgba(100, 255, 218, 0.2); /* Subtle initial glow */
-            cursor: default;
+            @apply px-3 py-1 rounded-full bg-[#0a192f]/60 border border-green/40 text-light-slate text-xs font-fira hover:bg-green/10 transition;
         }
-
-        .skill-pill:hover {
-            transform: scale(1.05); /* Slight lift on hover */
-            background-color: var(--green); /* Fill with green on hover */
-            color: var(--dark-navy) !important; /* Dark text on green hover */
-            box-shadow: 0 0 15px rgba(100, 255, 218, 0.8); /* Stronger glow on hover */
-        }
-        /* --- END ENHANCED SKILL PILL STYLING --- */
-        
         /* Style for the skill category headings */
         .skill-category-title {
             /* Increased size and added border for highlighting */
@@ -294,7 +279,7 @@
             </p>
             <div class="reveal">
                 <!-- Applied new unique radial fill hover effect -->
-                <a href="Aniket_Resume.pdf" download="Aniket_Resume.pdf" class="font-fira text-green border border-green rounded-md px-8 py-4 btn-radial-fill inline-block">
+                <a href="AniketPatel_Resume.pdf" download="AniketPatel_Resume.pdf" class="font-fira text-green border border-green rounded-md px-8 py-4 btn-radial-fill inline-block">
                     Download CV
                 </a>
             </div>
@@ -368,11 +353,15 @@
                         </div>
                     </div>
                     <!-- END UPDATED SKILLS -->
-                <<!-- Remove the absolute gradient div entirely -->
+                </div>
+                <!-- FIXED: Image container moved inside the flex parent and given a fixed width on MD screens -->
+                <div class="md:w-1/3 mt-8 md:mt-0">
                     <div class="relative group w-full max-w-xs mx-auto">
-                        <img src="aniket.jpg" class="rounded-lg w-full object-cover" alt="Aniket">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                        <!-- IMPORTANT: Using a placeholder image for consistency -->
+                        <img src="https://placehold.co/300x400/0a192f/64ffda?text=Aniket+Patel" alt="Aniket Patel" class="relative rounded-lg w-full h-auto shadow-lg">
                     </div>
-
+                </div>
             </div>
         </section>
 
@@ -436,23 +425,23 @@
                         </div>
                     </div>
                     <div class="p-6 md:p-0">
-                        <!-- Custom Live Site Image -->
+                        <!-- Custom Live Site Image provided by user. Clicking the preview redirects to the site via external link icon on the left. -->
                         <a href="https://mkssindia.org" target="_blank" rel="noopener noreferrer">
-                        <img src="mkss.png"
-                            alt="mkssindia.org Live Site Preview"
-                            class="project-image opacity-80 hover:opacity-100 hover:scale-105 transition-transform transition-opacity rounded-lg w-full h-auto object-cover"
-                            onerror="this.onerror=null; this.src='https://placehold.co/600x300/112240/64ffda?text=mkssindia.org+Live+Site';">
+                        <img src="uploaded:image_88c136.jpg-8d58cf53-c2d0-4917-9f9f-5cf0a877521d" 
+                             alt="mkssindia.org Live Site Preview" 
+                             class="project-image opacity-80 hover:opacity-100 hover:scale-105 transition-transform transition-opacity rounded-lg w-full h-auto object-cover" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x300/112240/64ffda?text=mkssindia.org+Live+Site';">
                         </a>
                     </div>
-                </div> <!-- ADDED missing closing div for Project 1 container -->
+                </div>
                 
                 <!-- NEW PROJECT 2: Honorarium Management System (Project card re-added here) -->
                 <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
                     <div class="p-6 md:p-0 md:order-2">
                         <!-- Placeholder Image -->
-                         <img src="nic.jpg" 
-                            alt="Honorarium Management System Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
+                         <img src="https://placehold.co/600x300/233554/a8b2d1?text=NIC+Workflow+Automation" 
+                             alt="Honorarium Management System Preview" 
+                             class="project-image opacity-80 hover:opacity-100 transition-opacity">
                     </div>
                     <div class="p-6 md:order-1 text-left md:text-right">
                         <p class="font-fira text-sm text-green mb-1">Government Workflow Solution</p>
@@ -505,9 +494,9 @@
                     </div>
                     <div class="p-6 md:p-0">
                         <!-- Placeholder Image -->
-                        <img src="agri.jpg" 
-                            alt="Agri_Connect Project Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
+                        <img src="https://placehold.co/600x300/17382d/64ffda?text=AgriConnect+AI+Platform" 
+                             alt="Agri_Connect Project Preview" 
+                             class="project-image opacity-80 hover:opacity-100 transition-opacity">
                     </div>
                 </div>
 
@@ -515,9 +504,9 @@
                  <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
                     <div class="p-6 md:p-0 md:order-2">
                         <!-- Reverted to standard Placeholder Image -->
-                        <img src="antitheft.jpg" 
-                            alt="Bluetooth Anti-Theft System Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
+                        <img src="https://placehold.co/600x300/0a192f/64ffda?text=Anti-Theft+Device+Hardware" 
+                             alt="Bluetooth Anti-Theft System Preview" 
+                             class="project-image opacity-80 hover:opacity-100 transition-opacity">
                     </div>
                     <div class="p-6 md:order-1 text-left md:text-right">
                         <p class="font-fira text-sm text-green mb-1">Patented Research Project</p>
@@ -548,9 +537,9 @@
                         <!-- Title size increased to text-3xl -->
                         <h3 class="text-3xl font-bold text-lightest-slate mb-4">E-Book Store</h3>
                         <p class="mb-4">
-                            A scalable full-stack bookstore system built using **Spring Boot** and **PostgreSQL**, featuring 
-                            secure authentication, an interactive admin dashboard, and integrated online payment gateway 
-                            support for a smooth checkout experience.
+                             A scalable full-stack bookstore system built using **Spring Boot** and **PostgreSQL**, featuring 
+                             secure authentication, an interactive admin dashboard, and integrated online payment gateway 
+                             support for a smooth checkout experience.
                         </p>
                         
                         <!-- SKILLS: Already using rounded pill format -->
@@ -575,9 +564,9 @@
                     </div>
                     <div class="p-6 md:p-0">
                         <!-- Placeholder Image -->
-                        <img src="ebook.jpg" 
-                            alt="E-Book Store Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
+                        <img src="https://placehold.co/600x300/112240/a8b2d1?text=Digital+Book+E-Commerce+API" 
+                             alt="E-Book Store Preview" 
+                             class="project-image opacity-80 hover:opacity-100 transition-opacity">
                     </div>
                 </div>
 
@@ -585,9 +574,9 @@
                 <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
                     <div class="p-6 md:p-0 md:order-2">
                         <!-- Placeholder Image replaced by Live Generated Image -->
-                        <img id="jobportal" 
-                            alt="Job Portal Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center text-center">
+                        <img id="job-portal-image" src="https://placehold.co/600x300/0a192f/64ffda?text=Loading+Image..." 
+                             alt="Job Portal Preview" 
+                             class="project-image opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center text-center">
                     </div>
                     <div class="p-6 md:order-1 text-left md:text-right">
                         <p class="font-fira text-sm text-green mb-1">Featured Project</p>
@@ -624,7 +613,11 @@
             </h2>
              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 <!-- Achievement 1: Amazon Interview -->
-                
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
+                     <i data-feather="briefcase" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">Amazon SDE-1 Interview</h3>
+                     <p class="text-sm">Cleared 4 out of 5 rounds, showcasing strong problem-solving skills.</p>
+                 </div>
                 <!-- Achievement 2 (NEW: NIC Deployment) -->
                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
                     <i data-feather="server" class="w-12 h-12 text-green mb-4"></i>
@@ -632,47 +625,47 @@
                     <p class="text-sm">Independently designed and deployed a full-stack workflow application on the **NIC network (MeitY)**.</p>
                 </div>
                 <!-- Achievement 3 (mkssindia) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="globe" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Live Website Deployment</h3>
-                    <p class="text-sm">Deployed and manage mkssindia.org, ensuring high availability.</p>
-                </div>
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
+                     <i data-feather="globe" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">Live Website Deployment</h3>
+                     <p class="text-sm">Deployed and manage mkssindia.org, ensuring high availability.</p>
+                 </div>
                 <!-- Achievement 4 (Patent) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="award" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Patent Published</h3>
-                    <p class="text-sm">For a "**Bluetooth Anti-Theft System**" (No. 202411093785 A).</p>
-                </div>
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
+                     <i data-feather="award" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">Patent Published</h3>
+                     <p class="text-sm">For a "**Bluetooth Anti-Theft System**" (No. 202411093785 A).</p>
+                 </div>
                 <!-- Achievement 5 (PCC Club Role) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="users" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">PCC Club Secretary & Active Member</h3>
-                    <p class="text-sm">Actively conducting coding contests and managing club operations.</p>
-                </div>
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
+                     <i data-feather="users" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">PCC Club Secretary & Active Member</h3>
+                     <p class="text-sm">Actively conducting coding contests and managing club operations.</p>
+                 </div>
                 <!-- Achievement 6 (DSA) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="code" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">500+ LeetCode Problems</h3>
-                    <p class="text-sm">Specializing in dynamic programming, graphs, and binary trees.</p>
-                </div>
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
+                     <i data-feather="code" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">500+ LeetCode Problems</h3>
+                     <p class="text-sm">Specializing in dynamic programming, graphs, and binary trees.</p>
+                 </div>
                 <!-- Achievement 7 (Top 2% Finalist) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="bar-chart-2" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Top 2% Finalist</h3>
-                    <p class="text-sm">In the Flipkart GRID 2.0 System Design Challenge.</p>
-                </div>
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
+                     <i data-feather="bar-chart-2" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">Top 2% Finalist</h3>
+                     <p class="text-sm">In the Flipkart GRID 2.0 System Design Challenge.</p>
+                 </div>
                 <!-- Achievement 8 (GSoC) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="users" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">GSoC 2024 Contributor</h3>
-                    <p class="text-sm">Contributed to open-source with GirlScript Summer of Code.</p>
-                </div>
-                <!-- Achievement 9 (Coding Ninjas) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center min-h-[190px]">
-                    <i data-feather="trending-up" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Ranked 7th on Coding Ninjas</h3>
-                    <p class="text-sm">Achieved top ranking on the leaderboard in October 2024.</p>
-                </div>
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
+                     <i data-feather="users" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">GSoC 2024 Contributor</h3>
+                     <p class="text-sm">Contributed to open-source with GirlScript Summer of Code.</p>
+                 </div>
+                 <!-- Achievement 9 (Coding Ninjas) -->
+                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center min-h-[190px]">
+                     <i data-feather="trending-up" class="w-12 h-12 text-green mb-4"></i>
+                     <h3 class="font-semibold text-lightest-slate mb-2">Ranked 7th on Coding Ninjas</h3>
+                     <p class="text-sm">Achieved top ranking on the leaderboard in October 2024.</p>
+                 </div>
              </div>
         </section>
 
@@ -697,9 +690,9 @@
              <p class="font-fira text-lg text-green mb-4">Crafting future-ready code and ideas.</p>
              <!-- Mobile Social Icons -->
              <div class="flex md:hidden justify-center space-x-6 mb-4">
-                <a href="https://github.com/anikettP" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="github" class="w-6 h-6"></i></a>
-                <a href="https://linkedin.com/in/aniketpatel23" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="linkedin" class="w-6 h-6"></i></a>
-                <a href="https://leetcode.com/aniketpatel_23/" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="codesandbox" class="w-6 h-6"></i></a>
+                 <a href="https://github.com/anikettP" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="github" class="w-6 h-6"></i></a>
+                 <a href="https://linkedin.com/in/aniketpatel23" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="linkedin" class="w-6 h-6"></i></a>
+                 <a href="https://leetcode.com/aniketpatel_23/" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="codesandbox" class="w-6 h-6"></i></a>
             </div>
             <p class="font-fira text-sm text-slate">&copy; 2025 Designed & Built by Aniket Patel.</p>
         </div>
@@ -985,7 +978,3 @@
     </script>
 </body>
 </html>
-
-
-
-
