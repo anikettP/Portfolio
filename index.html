@@ -4,1043 +4,861 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aniket Patel - Java Full-Stack Developer</title>
+    <meta name="description" content="Aniket Patel - Backend Software Engineer specializing in Java, Spring Boot, and scalable system architecture.">
+    <title>Aniket Patel | Backend Software Engineer</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Google Fonts: Retro Collection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    
     <!-- Custom CSS -->
     <style>
         :root {
-            --dark-navy: #0a192f;
-            --navy: #112240;
-            --light-navy: #233554;
-            --slate: #8892b0;
-            --light-slate: #a8b2d1;
-            --lightest-slate: #ccd6f6;
-            --white: #e6f1ff;
-            --green: #64ffda;
+            --bg-paper: #eaddcf;
+            --ink: #111111;
+            --accent-red: #c0392b;
+            --accent-tape: #f39c12;
+            
+            --font-display: 'Anton', sans-serif;
+            --font-sub: 'Oswald', sans-serif;
+            --font-mono: 'Special Elite', cursive;
         }
 
+        /* --- Global Texture --- */
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #020c1b; /* Solid dark background */
-            color: var(--slate);
-            min-height: 100vh;
+            background-color: var(--bg-paper);
+            color: var(--ink);
+            font-family: var(--font-mono);
             position: relative;
-        }
-        
-        /* Ensure interactive elements use the pointer cursor */
-        a, button, .card-glass {
-            cursor: pointer; 
+            overflow-x: hidden;
+            background-image: url("https://www.transparenttextures.com/patterns/cardboard-flat.png");
         }
 
-        .font-fira { font-family: 'Fira Code', monospace; }
-
-        /* Preloader */
-        .preloader {
+        body::after {
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-navy);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.4;
+            pointer-events: none;
             z-index: 9999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        .preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .loader-logo {
-            font-family: 'Fira Code', monospace;
-            font-size: 2rem;
-            color: var(--green);
-            border: 2px solid var(--green);
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            animation: pulse 1.5s infinite ease-in-out;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 10px var(--green); }
-            50% { transform: scale(1.05); box-shadow: 0 0 25px var(--green); }
+        /* --- Typography --- */
+        h1, h2, h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 1px; }
+        h4, h5 { font-family: var(--font-sub); text-transform: uppercase; }
+        
+        .text-ink { color: var(--ink); }
+        .bg-ink { background-color: var(--ink); color: var(--bg-paper); }
+
+        /* --- Sawtooth Borders --- */
+        .sawtooth-top {
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(135deg, var(--ink) 25%, transparent 25%) -15px 0,
+                        linear-gradient(225deg, var(--ink) 25%, transparent 25%) -15px 0,
+                        linear-gradient(315deg, var(--ink) 25%, transparent 25%),
+                        linear-gradient(45deg, var(--ink) 25%, transparent 25%);
+            background-size: 30px 30px;
+            background-color: transparent;
+        }
+        
+        .sawtooth-divider {
+            height: 20px;
+            width: 100%;
+            background:
+                conic-gradient(from 135deg at top, var(--ink) 90deg, transparent 0) 0 0 / 20px 10px repeat-x,
+                conic-gradient(from -45deg at bottom, var(--ink) 90deg, transparent 0) 0 100% / 20px 10px repeat-x;
+            margin: 2rem 0;
+            opacity: 0.8;
         }
 
-        /* Glassmorphism Card Style */
-        .card-glass {
-            background-color: rgba(35, 53, 84, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+        /* --- Ribbon Banner --- */
+        .ribbon-container {
             position: relative;
-            transform-style: preserve-3d;
+            display: inline-block;
+            margin-bottom: 1rem;
+            max-width: 100%;
         }
-        
-        /* ENHANCED Project Card Hover Effect (Lift and Green Glow Only) */
-        .card-glass:hover {
-            transform: translateY(-5px); /* Lift */
-            /* Enhanced green glow shadow */
-            box-shadow: 0 15px 45px -15px rgba(100, 255, 218, 0.5), 0 0 15px rgba(100, 255, 218, 0.1); 
-        }
-        
-        /* CV Button Unique Hover Effect (Radial Fill) */
-        .btn-radial-fill {
+        .ribbon {
+            background: var(--ink);
+            color: var(--bg-paper);
+            padding: 0.5rem 1.5rem;
             position: relative;
-            overflow: hidden;
-            transition: color 0.5s ease-in-out;
             z-index: 10;
+            font-family: var(--font-display);
+            transform: skew(-10deg);
+            display: inline-block;
         }
-        .btn-radial-fill::before {
+        .ribbon-content {
+            display: block;
+            transform: skew(10deg);
+        }
+        .ribbon::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: var(--green);
-            border-radius: 50%; /* Start as a circle */
-            transition: width 0.5s ease-out, height 0.5s ease-out, transform 0.5s ease-out;
-            transform: translate(-50%, -50%);
+            top: 10px;
+            left: -10px;
+            width: 30px;
+            height: 100%;
+            background: #333;
             z-index: -1;
-        }
-        .btn-radial-fill:hover {
-            color: var(--dark-navy) !important;
-        }
-        .btn-radial-fill:hover::before {
-            width: 300%;
-            height: 300%;
-            border-radius: 0.375rem; /* Shape change on hover to match button corners */
+            transform: skew(10deg);
         }
 
-        /* Accent Color */
-        .text-green { color: var(--green); }
-        .border-green { border-color: var(--green); }
-        .bg-green { background-color: var(--green); }
-
-        /* Section heading style */
-        .section-heading::before {
-            content: "0" counter(section) ".";
-            counter-increment: section;
-            margin-right: 10px;
-            color: var(--green);
-            font-family: 'Fira Code', monospace;
-            font-weight: 400;
+        /* --- Tape Effect --- */
+        .masking-tape {
+            position: absolute;
+            top: -15px;
+            height: 35px;
+            background-color: rgba(243, 156, 18, 0.85);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            z-index: 20;
+            clip-path: polygon(0% 5%, 2% 0%, 5% 5%, 8% 0%, 10% 5%, 90% 5%, 92% 0%, 95% 5%, 98% 0%, 100% 5%, 100% 95%, 98% 100%, 95% 95%, 92% 100%, 90% 95%, 10% 95%, 8% 100%, 5% 95%, 2% 100%, 0% 95%);
         }
+        /* Mobile-safe tape positioning */
+        .tape-center { left: 50%; transform: translateX(-50%) rotate(-2deg); width: 100px; }
+        .tape-right { right: 10%; transform: rotate(3deg); width: 80px; }
+        .tape-left { left: 10%; transform: rotate(-3deg); width: 90px; }
 
-        /* Shimmering Gradient Text */
-        .gradient-text {
-            background: linear-gradient(90deg, var(--lightest-slate), var(--green), var(--lightest-slate));
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shimmer 5s linear infinite;
+        /* --- Image Halftone Filter --- */
+        .halftone-img {
+            filter: grayscale(100%) contrast(1.2) brightness(0.9);
+            position: relative;
+            border: 4px solid var(--ink);
+            transition: transform 0.3s;
         }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        .halftone-img:hover {
+            transform: rotate(2deg) scale(1.02);
         }
-
-        /* Typing Effect Cursor */
-        #typing-text::after {
-            content: '|';
+        .halftone-wrapper {
+            position: relative;
             display: inline-block;
-            animation: blink 0.7s infinite;
-            color: var(--green);
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Scroll-triggered reveal animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            transition-delay: var(--delay, '0s');
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .project-image {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 0.375rem;
-            /* Added shadow to project images for depth */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .halftone-wrapper::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, var(--ink) 10%, transparent 11%);
+            background-size: 4px 4px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* --- Browser Mockup for Previews --- */
+        .browser-mockup {
+            border: 3px solid var(--ink);
+            border-radius: 4px;
+            overflow: hidden;
+            background: white;
+            position: relative;
+            transition: transform 0.3s;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+        }
+        .browser-header {
+            background: var(--ink);
+            height: 28px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            gap: 6px;
+            border-bottom: 2px solid var(--ink);
+        }
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--bg-paper);
+            border-radius: 50%;
+        }
+        .browser-mockup:hover {
+            transform: translateY(-5px);
+            box-shadow: 10px 10px 0px rgba(192, 57, 43, 0.2);
         }
         
-        /* New class for consistent skill tags (used across all projects) */
-        .skill-pill {
-            @apply px-3 py-1 rounded-full bg-[#0a192f]/60 border border-green/40 text-light-slate text-xs font-fira hover:bg-green/10 transition;
+        .preview-container {
+            position: relative;
+            width: 100%;
+            height: 250px; /* Mobile height */
+            background-color: #fff;
         }
-        /* Style for the skill category headings */
-        .skill-category-title {
-            /* Increased size and added border for highlighting */
-            @apply font-semibold text-xl text-green border-b border-green/50 pb-1 mb-2 inline-block relative px-2;
-            transition: all 0.3s ease;
+        @media (min-width: 768px) {
+            .preview-container { height: 350px; } /* Desktop height */
         }
-        .skill-category-title:hover {
-            text-shadow: 0 0 8px var(--green); /* Subtle text glow on hover */
-            border-bottom: 2px solid var(--lightest-slate); /* Thicker, brighter border on hover */
-            transform: translateY(-1px);
+        
+        .live-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
-        /* Style for the profile picture border glow */
-        .profile-pic-container {
-             /* Adjusted gradient for a better look */
-            background: linear-gradient(45deg, var(--green), #8a2be2, var(--green)); 
-            background-size: 200% 200%;
-            animation: gradient-shift 5s ease infinite;
+
+        .sepia-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: #704214;
+            opacity: 0.15;
+            pointer-events: none;
+            mix-blend-mode: multiply;
         }
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+
+        /* --- Buttons --- */
+        .btn-retro {
+            background: var(--ink);
+            color: var(--bg-paper);
+            font-family: var(--font-sub);
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
+        @media (min-width: 768px) {
+            .btn-retro { padding: 1rem 2rem; }
+            .btn-retro:hover { box-shadow: 6px 6px 0px var(--accent-red); transform: translate(-2px, -2px); }
+        }
+        .btn-retro:hover { color: var(--bg-paper); }
+        .btn-retro:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--ink); }
+
+        /* --- Layout Utilities --- */
+        .border-thick { border: 3px solid var(--ink); }
+        .border-dashed { border: 2px dashed var(--ink); }
+        .rotate-random:nth-child(odd) { transform: rotate(1deg); }
+        .rotate-random:nth-child(even) { transform: rotate(-1deg); }
+
+        /* Sticker Badge */
+        .badge-sticker {
+            width: 80px; height: 80px;
+            background: var(--accent-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: var(--font-display);
+            transform: rotate(15deg);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+            position: absolute;
+            z-index: 20;
+            line-height: 1.1;
+        }
+        @media (min-width: 768px) {
+            .badge-sticker { width: 100px; height: 100px; font-size: 1.2rem; }
+        }
+
+        /* --- Navbar --- */
+        .nav-link {
+            font-family: var(--font-sub);
+            text-transform: uppercase;
+            font-weight: 700;
+            position: relative;
+        }
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; width: 0%; height: 3px;
+            background: var(--ink);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::before { width: 100%; }
+
     </style>
 </head>
 
-<body class="antialiased leading-relaxed" style="counter-reset: section;">
-    
-    <!-- Preloader -->
-    <div id="preloader" class="preloader">
-        <div class="loader-logo">AP.</div>
+<body class="antialiased selection:bg-black selection:text-white">
+
+    <!-- Top Sawtooth Border -->
+    <div class="fixed top-0 left-0 w-full z-50 pointer-events-none">
+        <div class="sawtooth-top"></div>
     </div>
 
-    <canvas id="stars-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
-
-    <!-- Header & Navigation -->
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div class="container mx-auto max-w-7xl px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-green z-10">AP.</a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-sm font-fira text-lightest-slate hover:text-green transition duration-300">01. About</a>
-                <a href="#experience" class="text-sm font-fira text-lightest-slate hover:text-green transition duration-300">02. Experience</a>
-                <a href="#projects" class="text-sm font-fira text-lightest-slate hover:text-green transition duration-300">03. Projects</a>
-                <a href="#achievements" class="text-sm font-fira text-lightest-slate hover:text-green transition duration-300">04. Achievements</a>
-                <a href="#contact" class="text-sm font-fira text-lightest-slate hover:text-green transition duration-300">05. Contact</a>
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full z-40 pt-5 px-4 md:px-6 mix-blend-multiply">
+        <div class="container mx-auto flex justify-between items-center border-b-4 border-ink pb-3 md:pb-4 bg-[#eaddcf]/95 backdrop-blur-sm">
+            <a href="#home" class="text-2xl md:text-3xl font-display uppercase tracking-tighter hover:text-accent-red transition-colors">
+                Aniket Patel<span class="text-accent-red">.</span>
+            </a>
+            
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="#about" class="nav-link text-ink">About</a>
+                <a href="#experience" class="nav-link text-ink">Experience</a>
+                <a href="#projects" class="nav-link text-ink">Projects</a>
+                <a href="#contact" class="nav-link text-ink">Contact</a>
+                <a href="Aniket_Patel_resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-retro text-xs py-2 px-4 shadow-[3px_3px_0px_rgba(0,0,0,0.2)]">
+                    Resume
+                </a>
             </nav>
-            <button id="mobile-menu-button" class="md:hidden text-green focus:outline-none z-20">
-                <i data-feather="menu" class="w-6 h-6"></i>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden p-1" aria-label="Open Menu">
+                <i data-feather="menu" class="w-7 h-7 text-ink"></i>
             </button>
         </div>
+        
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden fixed top-0 right-0 h-screen w-3/4 bg-light-navy shadow-lg p-8 z-10">
-             <div class="flex flex-col items-center justify-center h-full space-y-8">
-                <a href="#about" class="text-lg font-fira text-lightest-slate hover:text-green transition">01. About</a>
-                <a href="#experience" class="text-lg font-fira text-lightest-slate hover:text-green transition">02. Experience</a>
-                <a href="#projects" class="text-lg font-fira text-lightest-slate hover:text-green transition">03. Projects</a>
-                <a href="#achievements" class="text-lg font-fira text-lightest-slate hover:text-green transition">04. Achievements</a>
-                <a href="#contact" class="text-lg font-fira text-lightest-slate hover:text-green transition">05. Contact</a>
-             </div>
+        <div id="mobile-menu" class="hidden fixed inset-0 bg-[#eaddcf] z-50 flex flex-col justify-center items-center text-center">
+            <button id="close-menu-btn" class="absolute top-6 right-6 p-2" aria-label="Close Menu">
+                <i data-feather="x" class="w-10 h-10 text-ink"></i>
+            </button>
+            <nav class="flex flex-col gap-8 w-full px-6">
+                <a href="#about" class="mobile-nav-link text-4xl font-display uppercase hover:underline decoration-4 decoration-accent-red">About</a>
+                <a href="#experience" class="mobile-nav-link text-4xl font-display uppercase hover:underline decoration-4 decoration-accent-red">Experience</a>
+                <a href="#projects" class="mobile-nav-link text-4xl font-display uppercase hover:underline decoration-4 decoration-accent-red">Projects</a>
+                <a href="#contact" class="mobile-nav-link text-4xl font-display uppercase hover:underline decoration-4 decoration-accent-red">Contact</a>
+                <a href="Aniket_Patel_resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-retro text-sm py-3 px-6 mt-4 w-full text-center">Download Resume</a>
+            </nav>
         </div>
     </header>
-    
-    <!-- Left Social Sidebar -->
-    <aside class="hidden md:block fixed bottom-0 left-12 w-10 z-10">
-        <div class="flex flex-col items-center gap-6 after:content-[''] after:block after:w-px after:h-24 after:bg-slate">
-            <a href="https://github.com/anikettP" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transform hover:-translate-y-1 transition-all"><i data-feather="github" class="w-5 h-5"></i></a>
-            <a href="https://linkedin.com/in/aniketpatel23" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transform hover:-translate-y-1 transition-all"><i data-feather="linkedin" class="w-5 h-5"></i></a>
-            <!-- ADDED LeetCode link -->
-            <a href="https://leetcode.com/aniketpatel_23/" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transform hover:-translate-y-1 transition-all">
-                <i data-feather="codesandbox" class="w-5 h-5"></i>
-            </a>
-        </div>
-    </aside>
 
-    <!-- Right Email Sidebar -->
-     <aside class="hidden md:block fixed bottom-0 right-12 w-10 z-10">
-        <div class="flex flex-col items-center gap-6 after:content-[''] after:block after:w-px after:h-24 after:bg-slate">
-            <a href="mailto:aniketpatel4p@gmail.com" class="font-fira text-sm tracking-widest" style="writing-mode: vertical-rl; color: var(--slate); transition: all 0.3s;" onmouseover="this.style.color='var(--green)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.color='var(--slate)'; this.style.transform='translateY(0px)';">
-                aniketpatel4p@gmail.com
-            </a>
-        </div>
-    </aside>
-
-    <main class="container mx-auto max-w-4xl px-6">
+    <main class="container mx-auto px-4 md:px-6 pt-28 md:pt-32 pb-20 relative z-10">
+        
         <!-- Hero Section -->
-        <section id="home" class="min-h-screen flex flex-col justify-center">
-            <!-- MODIFIED INTRO LINE -->
-            <p class="text-green font-fira text-lg mb-4 reveal">Hello, It's Me.</p>
-            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-lightest-slate mb-2 reveal gradient-text">Aniket Patel.</h1>
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold text-slate mb-8 reveal" id="typing-text-container">
-                <span id="typing-text"></span>
-            </h2>
-            <p class="max-w-xl mb-12 text-lg reveal">
-                I am a **Java Full-Stack Developer** specializing in building **scalable, high-performance applications**. Proficient in engineering robust **backend systems**, designing resilient **software architecture**, and leveraging **AI integration** to drive innovation and efficiency.
-            </p>
-            <div class="reveal">
-                <!-- Applied new unique radial fill hover effect -->
-                <a href="Aniket_Resume.pdf" download="Aniket_Resume.pdf" class="font-fira text-green border border-green rounded-md px-8 py-4 btn-radial-fill inline-block">
-                    Download CV
-                </a>
+        <section id="home" class="min-h-[75vh] flex flex-col justify-center relative py-10">
+            
+            <!-- Floating Sticker -->
+            <div class="badge-sticker top-10 right-4 md:top-20 md:right-32 animate-bounce text-sm">
+                Open To<br>Work
+            </div>
+
+            <div class="max-w-5xl relative mt-10 md:mt-0">
+                <div class="ribbon-container">
+                    <div class="ribbon text-sm sm:text-base md:text-xl">
+                        <span class="ribbon-content">BACKEND SOFTWARE ENGINEER</span>
+                    </div>
+                </div>
+                
+                <h1 class="text-5xl sm:text-7xl lg:text-9xl font-display leading-[0.95] md:leading-[0.9] mb-6 md:mb-8 text-ink" style="text-shadow: 3px 3px 0px rgba(0,0,0,0.1);">
+                    PRODUCTION<br>
+                    GRADE<br>
+                    <span class="text-transparent break-words" style="-webkit-text-stroke: 2px var(--ink); md:-webkit-text-stroke: 3px var(--ink);">SYSTEMS</span>
+                </h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mt-8 md:mt-12 border-t-4 border-ink pt-6 md:pt-8">
+                    <p class="text-base md:text-lg leading-relaxed font-mono opacity-90 text-justify">
+                        <strong>Professional Summary:</strong> Backend-focused Software Engineer architecting and delivering robust systems using Java, Spring Boot, REST APIs, and PostgreSQL. Proven track record in deploying scalable, highly-available applications serving thousands of active users.
+                    </p>
+                    
+                    <div class="flex flex-col gap-4">
+                        <a href="#projects" class="btn-retro w-full md:w-fit text-sm">
+                            VIEW PORTFOLIO
+                        </a>
+                        <div class="flex flex-wrap gap-3 justify-center md:justify-start mt-2 font-mono text-xs md:text-sm font-bold">
+                            <a href="mailto:aniketpatel4p@gmail.com" class="border-2 border-ink px-2 py-1 hover:bg-ink hover:text-[#eaddcf] transition flex items-center gap-1"><i data-feather="mail" class="w-3 h-3 md:w-4 md:h-4"></i> Email</a>
+                            <a href="https://www.linkedin.com/in/aniket-patel-a4977224b/" target="_blank" rel="noopener noreferrer" class="border-2 border-ink px-2 py-1 hover:bg-ink hover:text-[#eaddcf] transition flex items-center gap-1"><i data-feather="linkedin" class="w-3 h-3 md:w-4 md:h-4"></i> LinkedIn</a>
+                            <a href="https://leetcode.com/u/aniketpatel_23/" target="_blank" rel="noopener noreferrer" class="border-2 border-ink px-2 py-1 hover:bg-ink hover:text-[#eaddcf] transition flex items-center gap-1"><i data-feather="code" class="w-3 h-3 md:w-4 md:h-4"></i> LeetCode</a>
+                            <a href="https://github.com/anikettP" target="_blank" rel="noopener noreferrer" class="border-2 border-ink px-2 py-1 hover:bg-ink hover:text-[#eaddcf] transition flex items-center gap-1"><i data-feather="github" class="w-3 h-3 md:w-4 md:h-4"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <div class="sawtooth-divider"></div>
 
         <!-- About Section -->
-        <section id="about" class="py-24 reveal">
-            <h2 class="section-heading text-3xl font-bold text-lightest-slate mb-8 flex items-center after:content-[''] after:block after:h-px after:w-full after:bg-light-navy after:ml-4">
-                About Me
-            </h2>
-            <div class="flex flex-col md:flex-row gap-12">
-                <div class="md:w-2/3 space-y-4">
-                    <p>
-                        Hello! I'm Aniket, a Computer Science undergraduate with a passion for developing robust and efficient software solutions. My journey began with a curiosity for how things work, which led me to dive deep into Java and the Spring ecosystem.
-                    </p>
-                    <p>
-                        My main focus these days is building scalable backend systems with clean architecture. I have hands-on experience at the <span class="text-green">National Informatics Centre (NIC)</span>, where I contributed to workflow platforms for pan-India government operations.
-                    </p>
-                    <p>Here are a few technologies I've been working with recently:</p>
+        <section id="about" class="py-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
+                <!-- Image Collage -->
+                <div class="md:col-span-5 relative rotate-random p-2 md:p-4">
+                    <div class="masking-tape tape-center"></div>
+                    <div class="halftone-wrapper w-full">
+                        <img src="https://placehold.co/600x800/eaddcf/111111?text=ANIKET+PATEL" alt="Aniket Patel" class="halftone-img w-full h-auto bg-white p-2 shadow-xl">
+                    </div>
+                    <div class="absolute bottom-4 left-4 bg-ink text-white px-2 py-1 font-mono text-[10px] md:text-xs transform -rotate-2">
+                        PROFILE ID: 01
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="md:col-span-7">
+                    <h2 class="text-4xl md:text-5xl font-display mb-6 md:mb-8 border-b-4 border-ink inline-block pb-2">OPERATOR PROFILE</h2>
                     
-                    <!-- UPDATED: Comprehensive Technical Skills List using the skill-pill class and highlighted titles -->
-                    <div class="space-y-4">
-                        <p class="skill-category-title">Languages</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">Java</span>
-                            <span class="skill-pill">C++</span>
-                            <span class="skill-pill">Python</span>
-                            <span class="skill-pill">SQL</span>
-                            <span class="skill-pill">JavaScript</span>
-                        </div>
-
-                        <p class="skill-category-title mt-4">Backend</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">Spring Boot</span>
-                            <span class="skill-pill">Spring MVC</span>
-                            <span class="skill-pill">JPA / Hibernate</span>
-                            <span class="skill-pill">Microservices</span>
-                            <span class="skill-pill">Tomcat</span>
-                            <span class="skill-pill">REST APIs</span>
-                            <span class="skill-pill">OOP</span>
-                            <span class="skill-pill">RBAC</span>
-                            <span class="skill-pill">Audit Logging</span>
-                        </div>
-
-                        <p class="skill-category-title mt-4">Frontend & Integrations</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">Thymeleaf</span>
-                            <span class="skill-pill">Bootstrap</span>
-                            <span class="skill-pill">AdminLTE</span>
-                            <span class="skill-pill">HTML/CSS</span>
-                            <span class="skill-pill">jQuery</span>
-                            <span class="skill-pill">AJAX</span>
-                            <span class="skill-pill">SMTP / Notifications</span>
-                            <span class="skill-pill">Razorpay Integration</span>
-                        </div>
-                        
-                        <p class="skill-category-title mt-4">Database & DevOps</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">PostgreSQL</span>
-                            <span class="skill-pill">MySQL (Optimization)</span>
-                            <span class="skill-pill">MongoDB (Atlas/Compass)</span>
-                            <span class="skill-pill">Docker</span>
-                            <span class="skill-pill">cPanel</span>
-                            <span class="skill-pill">Linux</span>
-                            <span class="skill-pill">PM2 / WinSCP / Putty</span>
-                            <span class="skill-pill">SSL/HTTPS</span>
-                            <span class="skill-pill">Production Monitoring</span>
-                        </div>
-                        
-                        <p class="skill-category-title mt-4">Concepts & Other</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-pill">DSA (500+ LeetCode)</span>
-                            <span class="skill-pill">Git / GitHub / Maven</span>
-                            <span class="skill-pill">IntelliJ / Eclipse / Debugging</span>
-                            <span class="skill-pill">OAuth 2.0</span>
-                            <span class="skill-pill">AI Integration (Prompt Engineering)</span>
-                        </div>
+                    <div class="prose prose-base md:prose-lg font-mono text-ink text-justify md:text-left">
+                        <p class="mb-4">
+                            <strong>Core Value Proposition:</strong> I engineer, optimize, and maintain production-grade backend modules using Spring Boot and RESTful architectures. I take full ownership of API lifecycle, complex database querying, and server-side business logic to guarantee scalable, fault-tolerant solutions.
+                        </p>
+                        <p class="mb-6">
+                            <strong>Education:</strong> B.Tech in Computer Science & Engineering, Govt. Engineering College, Ajmer (2022-Present). CGPA: 7.45.
+                        </p>
                     </div>
-                    <!-- END UPDATED SKILLS -->
-                </div>
-                <!-- Profile Picture Container -->
-                <div class="md:w-1/3 mt-8 md:mt-0">
-                    <div class="relative group w-64 h-64 mx-auto rounded-lg overflow-hidden profile-pic-container p-1">
-                        <!-- Inner container for the image/placeholder to create the glowing border effect -->
-                        <div class="bg-[#020c1b] w-full h-full rounded-md flex items-center justify-center">
-                            <img 
-                                src="aniket.jpg"
-                                alt="Aniket Patel Profile Picture Placeholder"
-                                class="w-full h-full object-cover rounded-md opacity-80 transition duration-300 group-hover:opacity-100"
-                            >
+
+                    <!-- Tech Specs Table -->
+                    <div class="border-thick p-4 md:p-6 bg-white relative mt-6">
+                        <h3 class="text-lg md:text-xl font-sub border-b-2 border-dashed border-ink pb-2 mb-4">TECHNICAL SPECIFICATIONS</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 font-mono text-xs md:text-sm">
+                            <div>
+                                <strong class="block uppercase border-b border-ink mb-1">Core Languages</strong>
+                                Java, C++, JavaScript, SQL
+                            </div>
+                            <div>
+                                <strong class="block uppercase border-b border-ink mb-1">Backend Engine</strong>
+                                Spring Boot, JPA/Hibernate, REST APIs, RBAC
+                            </div>
+                            <div>
+                                <strong class="block uppercase border-b border-ink mb-1">DevOps & Infra</strong>
+                                Linux, PM2, cPanel, SSL/HTTPS, CI/CD
+                            </div>
+                            <div>
+                                <strong class="block uppercase border-b border-ink mb-1">Data & Tools</strong>
+                                PostgreSQL, MongoDB, Git, Maven, Postman
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- New Section: Experience -->
-        <section id="experience" class="py-24 reveal">
-            <h2 class="section-heading text-3xl font-bold text-lightest-slate mb-8 flex items-center after:content-[''] after:block after:h-px after:w-full after:bg-light-navy after:ml-4">
-                Experience
-            </h2>
-            <div class="card-glass rounded-lg p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div class="md:w-3/4">
-                    <h3 class="text-2xl font-bold text-lightest-slate">Java Full-Stack Developer Intern</h3>
-                    <p class="text-green mb-2">National Informatics Centre (NIC) - Office Automation Division (OAD), MeitY, New Delhi</p>
-                    <p class="text-sm font-fira text-slate">June 2025 – July 2025</p>
-                    <p class="mt-4">
-                        During this high-impact internship, I **drove innovation** by independently designing, developing, and **deploying a critical, live full-stack application** on the internal NIC network. This project, the **Honorarium Management System**, successfully **automated the complex approval workflow** for **over 1000 government officials**.
-                    </p>
-                    <ul class="list-disc list-inside text-light-slate text-sm mt-4 space-y-1">
-                        <li>**Engineered** a robust workflow system, **boosting approval efficiency by 40%** across 10+ departments.</li>
-                        <li>**Implemented Role-Based Access Control (RBAC)** and comprehensive **audit logging** to ensure rigorous security and government compliance.</li>
-                        <li>**Optimized complex PostgreSQL queries**, successfully **reducing report generation time from 5 seconds to under 1 second**.</li>
-                        <li>**Designed and architected** a modular and scalable solution utilizing **Spring Boot Microservices**.</li>
-                    </ul>
+        <div class="sawtooth-divider"></div>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-12">
+            <div class="text-center mb-12 md:mb-16">
+                <span class="font-mono text-[10px] md:text-xs border border-ink px-2 py-1 uppercase tracking-widest">Career History</span>
+                <h2 class="text-5xl md:text-6xl font-display mt-4">WORK EXPERIENCE</h2>
+            </div>
+
+            <div class="max-w-4xl mx-auto border-l-4 border-ink pl-6 md:pl-16 relative space-y-12 md:space-y-16 ml-4 md:ml-auto">
+                
+                <!-- Timeline Item 1 -->
+                <div class="relative">
+                     <div class="absolute -left-[37px] md:-left-[78px] top-2 w-5 h-5 md:w-6 md:h-6 bg-ink border-2 border-[#eaddcf] rounded-full"></div>
+                    
+                    <div class="bg-white border-thick p-5 md:p-8 shadow-[6px_6px_0px_rgba(0,0,0,1)] relative">
+                        <div class="absolute -top-3 -right-2 md:-right-3 bg-accent-red text-white font-display px-2 py-1 text-xs md:text-base transform rotate-3 z-10">
+                            CURRENT
+                        </div>
+                        <span class="font-mono text-xs md:text-sm bg-gray-200 px-2">OCT 2024 - PRESENT</span>
+                        <h3 class="text-2xl md:text-3xl font-display mt-2 leading-tight">MOON (Startup)</h3>
+                        <p class="font-sub text-lg md:text-xl mb-3 text-gray-600 uppercase leading-snug">Software Developer & Deployment Engineer</p>
+                        
+                        <p class="font-mono text-xs md:text-sm mb-3 leading-relaxed text-justify">
+                            Architected cloud infrastructure setup, production deployment, and SEO optimization of enterprise and client-facing platforms.
+                        </p>
+
+                        <ul class="list-disc list-outside font-mono space-y-2 text-xs md:text-sm ml-4 text-justify">
+                            <li><strong>wowwoolies.co.in</strong> – MERN-based e-commerce platform deployed on Linux with SSL, reverse proxy setup, and SEO optimization (1000+ users).</li>
+                            <li><strong>moonnow.in</strong> – Official startup website deployed with secure hosting, DNS management, and on-page SEO configuration.</li>
+                            <li><strong>mkssindia.org</strong> – Static NGO website deployed via cPanel with SSL setup, hosting management, and basic SEO improvements.</li>
+                        </ul>
+                        <div class="mt-4 pt-3 border-t border-dashed border-ink flex flex-wrap gap-2 font-sub uppercase text-[10px] md:text-xs font-bold text-gray-500">
+                            <span>Tech Stack:</span> <span class="text-ink">Linux, PM2, cPanel, MERN, SSL, DNS</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="md:w-1/4 mt-6 md:mt-0 md:text-right">
-                    <!-- Placeholder image -->
-                    <img 
-                        src="nic1.jpg"
-                        alt="NIC Logo Placeholder"
-                        class="mx-auto md:ml-auto md:mr-0 rounded-lg opacity-80 w-24 h-24 object-contain"
-                    >
+
+                <!-- Timeline Item 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[37px] md:-left-[78px] top-2 w-5 h-5 md:w-6 md:h-6 bg-ink border-2 border-[#eaddcf] rounded-full"></div>
+                    
+                    <div class="bg-white border-thick p-5 md:p-8 shadow-[6px_6px_0px_rgba(0,0,0,1)] relative">
+                        <span class="font-mono text-xs md:text-sm bg-gray-200 px-2">JUNE 2025 - JULY 2025</span>
+                        <h3 class="text-2xl md:text-3xl font-display mt-2 leading-tight">National Informatics Centre (NIC)</h3>
+                        <p class="font-sub text-lg md:text-xl mb-3 text-gray-600 uppercase leading-snug">Java Full-Stack Developer Intern</p>
+                        
+                        <ul class="list-disc list-outside font-mono space-y-2 text-xs md:text-sm ml-4 text-justify">
+                            <li>Engineered an internally deployed government application supporting workflows for <strong>1000+ government officials</strong>.</li>
+                            <li>Built and integrated scalable backend services, REST APIs, and automated approval workflows.</li>
+                            <li>Enforced strict Role-Based Access Control (RBAC) and data integrity measures.</li>
+                        </ul>
+                        <div class="mt-4 pt-3 border-t border-dashed border-ink flex flex-wrap gap-2 font-sub uppercase text-[10px] md:text-xs font-bold text-gray-500">
+                            <span>Tech Stack:</span> <span class="text-ink">Java, Spring Boot, PostgreSQL, REST APIs</span>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </section>
 
+        <div class="sawtooth-divider"></div>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-24">
-             <h2 class="section-heading text-3xl font-bold text-lightest-slate mb-8 flex items-center after:content-[''] after:block after:h-px after:w-full after:bg-light-navy after:ml-4">
-                Some Things I've Built
-            </h2>
-            <div class="grid grid-cols-1 gap-12">
-                
-                <!-- NEW PROJECT 1: wowwoolies.co.in - E-Commerce Live Deployment -->
-                <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
-                    <div class="p-6">
-                        <p class="font-fira text-sm text-green mb-1">Featured Project (E-Commerce Live Deployment)</p>
-                        <h3 class="text-3xl font-bold text-lightest-slate mb-4">wowwoolies.co.in - E-Commerce</h3>
-                        <p class="mb-4">
-                            Nationwide e-commerce site deployment. Managed \textbf{cPanel, PM2, and Linux server} setup. Configured \textbf{SSL/HTTPS} and production monitoring for high-performance and secure online transactions.
+        <section id="projects" class="py-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end border-b-4 border-ink mb-10 pb-4 gap-2">
+                <h2 class="text-5xl md:text-6xl font-display">LIVE DEPLOYMENTS</h2>
+                <span class="font-mono text-xs md:text-sm">Web Portfolio 2025</span>
+            </div>
+
+            <div class="grid grid-cols-1 gap-16 md:gap-24">
+
+                <!-- Project 1: WowWoolies (Text Left, Preview Right) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center group">
+                    <div class="order-2 lg:order-1 border-thick p-6 md:p-8 bg-[#f4f1ea] relative mt-4 lg:mt-0">
+                        <div class="masking-tape tape-left"></div>
+                        <h4 class="text-xs md:text-sm font-bold bg-ink text-white inline-block px-2 mb-2">E-COMMERCE PLATFORM</h4>
+                        <h3 class="text-3xl md:text-4xl font-display mb-3 break-all">WOWWOOLIES.CO.IN</h3>
+                        <p class="font-mono text-xs md:text-sm mb-5 text-justify">
+                            Live production e-commerce platform. Managed deployment, Linux hosting, SSL security, and secure payment integration supporting 1000+ users.
                         </p>
-                        
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="skill-pill">cPanel/Linux</span>
-                            <span class="skill-pill">PM2</span>
-                            <span class="skill-pill">SSL/HTTPS</span>
-                            <span class="skill-pill">Production Monitoring</span>
-                            <span class="skill-pill">E-Commerce</span>
+                        <div class="border-t-2 border-dashed border-ink pt-3 mb-5 flex flex-wrap gap-3 text-[10px] md:text-xs font-bold font-sub uppercase">
+                            <span>LINUX</span> <span>CPANEL</span> <span>SSL</span> <span>SEO</span>
                         </div>
-                        
-                        <div class="flex items-center gap-4">
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="github"></i></a>
-                            <a href="https://wowwoolies.co.in" target="_blank" rel="noopener noreferrer" class="text-light-slate hover:text-green transition"><i data-feather="external-link"></i></a>
-                        </div>
+                        <a href="https://wowwoolies.co.in/" target="_blank" rel="noopener noreferrer" class="btn-retro text-[10px] md:text-xs py-2 px-4 md:py-3 md:px-6 w-full md:w-auto">OPEN WEBSITE</a>
                     </div>
-                    <div class="p-6 md:p-0">
-                        <a href="https://wowwoolies.co.in" target="_blank" rel="noopener noreferrer">
-                        <img src="wowwoolies.jpg" 
-                            alt="wowwoolies.co.in Live Site Preview" 
-                            class="project-image opacity-80 hover:opacity-100 hover:scale-105 transition-transform transition-opacity rounded-lg w-full h-auto object-cover" 
-                            onerror="this.onerror=null; this.src='https://placehold.co/600x300/112240/64ffda?text=wowwoolies.co.in+Live+Site';">
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Project 2: mkssindia - LIVE DEPLOYMENT (Shifted) -->
-                <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
-                    <div class="p-6 md:p-0 md:order-2">
-                        <!-- Replaced local image with a placeholder, kept onerror for safety -->
-                        <a href="https://mkssindia.org" target="_blank" rel="noopener noreferrer">
-                        <img src="mkss.png" 
-                            alt="mkssindia.org Live Site Preview" 
-                            class="project-image opacity-80 hover:opacity-100 hover:scale-105 transition-transform transition-opacity rounded-lg w-full h-auto object-cover" 
-                            onerror="this.onerror=null; this.src='https://placehold.co/600x300/112240/64ffda?text=mkssindia.org+Live+Site';">
-                        </a>
-                    </div>
-                    <div class="p-6 md:order-1 text-left md:text-right">
-                        <p class="font-fira text-sm text-green mb-1">Featured Project (Live Deployment)</p>
-                        <!-- Title size increased to text-3xl -->
-                        <h3 class="text-3xl font-bold text-lightest-slate mb-4">mkssindia.org - Website Deployment</h3>
-                        <p class="mb-4">Deployed and managed hosting for a live website using \textbf{cPanel}, ensuring high availability, performance monitoring, and regular updates for a seamless user experience. Managed SEO via Google Search Console.</p>
-                        
-                        <!-- SKILLS: Already using rounded pill format -->
-                        <div class="flex flex-wrap gap-2 justify-start md:justify-end mb-4">
-                            <span class="skill-pill">cPanel</span>
-                            <span class="skill-pill">Linux Server</span>
-                            <span class="skill-pill">DNS Management</span>
-                            <span class="skill-pill">PHP/HTML</span>
-                            <span class="skill-pill">SEO</span>
-                        </div>
-                        
-                        <div class="flex items-center gap-4 justify-start md:justify-end">
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="github"></i></a>
-                            <a href="https://mkssindia.org" target="_blank" rel="noopener noreferrer" class="text-light-slate hover:text-green transition"><i data-feather="external-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 3: Honorarium Management System (Shifted) -->
-                <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
-                    <div class="p-6">
-                        <!-- Replaced local image with a placeholder -->
-                         <img src="nic.jpg" 
-                            alt="Honorarium Management System Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-6 text-left">
-                        <p class="font-fira text-sm text-green mb-1">Government Workflow Solution</p>
-                        <!-- Title size increased to text-3xl -->
-                        <h3 class="text-3xl font-bold text-lightest-slate mb-4">Honorarium Management System</h3>
-                        <p class="mb-4">
-                            This robust platform, developed for NIC (MeitY) for internal use, streamlines the honorarium approval process. It handles **1000+ officials** and automates complex multi-department workflow routing, ensuring compliance and efficiency.
-                        </p>
-                        
-                        <!-- SKILLS: Using rounded pill format -->
-                        <div class="flex flex-wrap gap-2 justify-start mb-4">
-                            <span class="skill-pill">Spring Boot</span>
-                            <span class="skill-pill">PostgreSQL</span>
-                            <span class="skill-pill">JPA / Hibernate</span>
-                            <span class="skill-pill">Microservices</span>
-                            <span class="skill-pill">RBAC</span>
-                            <span class="skill-pill">AdminLTE</span>
-                            <span class="skill-pill">Workflow Automation</span>
-                        </div>
-                        
-                        <div class="flex items-center gap-4 justify-start">
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="github"></i></a>
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="external-link"></i></a>
+                    
+                    <!-- Live Preview -->
+                    <div class="order-1 lg:order-2 rotate-1 block">
+                        <div class="browser-mockup w-full">
+                            <div class="browser-header">
+                                <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+                            </div>
+                            <div class="preview-container">
+                                <iframe src="https://wowwoolies.co.in/" class="live-iframe pointer-events-none" title="WowWoolies Live Preview" loading="lazy"></iframe>
+                                <div class="sepia-overlay"></div>
+                                <a href="https://wowwoolies.co.in/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10" aria-label="Visit WowWoolies"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 4: Agri-Connect (Shifted) -->
-                <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
-                    <div class="p-6 md:p-0 md:order-2">
-                        <!-- Replaced local image with a placeholder -->
-                        <img src="agri.jpg" 
-                            alt="Agri_Connect Project Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-6 md:order-1 text-left md:text-right">
-                        <p class="font-fira text-sm text-green mb-1">Featured Project</p>
-                        <!-- Title size increased to text-3xl -->
-                        <h3 class="text-3xl font-bold text-lightest-slate mb-4">Agri\_Connect-v6</h3>
-                        <p class="mb-4">A platform for the farmers of Kerala for SIH 2025, integrating AI with a full-stack backend to provide instant query resolution and support.</p>
-                        
-                        <!-- SKILLS: Already using rounded pill format -->
-                        <div class="flex flex-wrap gap-2 justify-start md:justify-end mb-4">
-                            <span class="skill-pill">Spring Boot</span>
-                            <span class="skill-pill">PostgreSQL</span>
-                            <span class="skill-pill">AI Integration (Dialogflow)</span>
-                            <span class="skill-pill">Next.js / Vercel</span>
-                            <span class="skill-pill">Tailwind CSS</span>
-                            <span class="skill-pill">Java 17</span>
-                        </div>
-                        
-                        <div class="flex items-center gap-4 justify-start md:justify-end">
-                            <a href="https://github.com/anikettP/Agri_Connect-v6" target="_blank" rel="noopener noreferrer" class="text-light-slate hover:text-green transition"><i data-feather="github"></i></a>
-                            <a href="https://agri-connect-v61.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-light-slate hover:text-green transition"><i data-feather="external-link"></i></a>
+                <!-- Project 2: MoonNow (Preview Left, Text Right) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center group">
+                     <!-- Live Preview -->
+                     <div class="order-1 lg:order-1 rotate-[-1deg] block">
+                        <div class="browser-mockup w-full">
+                            <div class="browser-header">
+                                <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+                            </div>
+                            <div class="preview-container">
+                                <iframe src="https://www.moonnow.in/" class="live-iframe pointer-events-none" title="MoonNow Live Preview" loading="lazy"></iframe>
+                                <div class="sepia-overlay"></div>
+                                <a href="https://www.moonnow.in/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10" aria-label="Visit MoonNow"></a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Project 5: Bluetooth Anti-Theft System (Based on Patent) (Shifted) -->
-                 <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
-                    <div class="p-6">
-                        <!-- Replaced local image with a placeholder -->
-                        <img src="antitheft.jpg" 
-                            alt="Bluetooth Anti-Theft System Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-6 text-left">
-                        <p class="font-fira text-sm text-green mb-1">Patented Research Project</p>
-                        <!-- Title size increased to text-3xl -->
-                        <h3 class="text-3xl font-bold text-lightest-slate mb-4">Bluetooth Anti-Theft System</h3>
-                        <p class="mb-4">Development of a hardware-software integrated anti-theft system utilizing Bluetooth connectivity for real-time tracking and alerting. The application is developed, and the physical device is **currently under testing and refinement**. **Patent published: No. 202411093785 A**.</p>
-                        
-                        <!-- SKILLS: Already using rounded pill format -->
-                        <div class="flex flex-wrap gap-2 justify-start mb-4">
-                            <span class="skill-pill">IoT Integration</span>
-                            <span class="skill-pill">Embedded C / Arduino</span>
-                            <span class="skill-pill">Android Studio (Java)</span>
-                            <span class="skill-pill">Microcontrollers</span>
-                            <span class="skill-pill">Wireless Communication</span>
-                        </div>
-                        
-                        <div class="flex items-center gap-4 justify-start">
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="github"></i></a>
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="external-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6: E-book Store (Shifted) -->
-                <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
-                    <div class="p-6 md:p-0 md:order-2">
-                        <!-- Replaced local image with a placeholder -->
-                        <img src="ebook.jpg" 
-                            alt="E-Book Store Preview" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-6 md:order-1 text-left md:text-right">
-                        <p class="font-fira text-sm text-green mb-1">Featured Project</p>
-                        <!-- Title size increased to text-3xl -->
-                        <h3 class="text-3xl font-bold text-lightest-slate mb-4">E-Book Store</h3>
-                        <p class="mb-4">
-                             A scalable full-stack bookstore system built using **Spring Boot** and **PostgreSQL**, featuring 
-                             secure authentication, an interactive admin dashboard, and integrated online payment gateway 
-                             support for a smooth checkout experience.
+                    <div class="order-2 lg:order-2 border-thick p-6 md:p-8 bg-[#f4f1ea] relative mt-4 lg:mt-0">
+                         <div class="masking-tape tape-right"></div>
+                        <h4 class="text-xs md:text-sm font-bold bg-ink text-white inline-block px-2 mb-2">STARTUP WEBSITE</h4>
+                        <h3 class="text-3xl md:text-4xl font-display mb-3 break-all">MOONNOW.IN</h3>
+                        <p class="font-mono text-xs md:text-sm mb-5 text-justify">
+                            Official startup web presence. Deployed on high-performance cloud hosting with custom DNS configuration and SEO optimization for maximum brand visibility.
                         </p>
-                        
-                        <!-- SKILLS: Already using rounded pill format -->
-                        <div class="flex flex-wrap gap-2 justify-start md:justify-end mb-4">
-                            <span class="skill-pill">Spring Boot</span>
-                            <span class="skill-pill">PostgreSQL</span>
-                            <span class="skill-pill">Thymeleaf</span>
-                            <span class="skill-pill">Spring Security</span>
-                            <span class="skill-pill">Payment Gateway</span>
-                            <span class="skill-pill">REST APIs</span>
-                            <span class="skill-pill">Java 17</span>
+                        <div class="border-t-2 border-dashed border-ink pt-3 mb-5 flex flex-wrap gap-3 text-[10px] md:text-xs font-bold font-sub uppercase">
+                            <span>HOSTING</span> <span>DNS</span> <span>OPTIMIZATION</span>
                         </div>
-                        
-                        <div class="flex items-center gap-4 justify-start md:justify-end">
-                            <a href="https://github.com/anikettP/E-book-Store" target="_blank" rel="noopener noreferrer" class="text-light-slate hover:text-green transition">
-                                <i data-feather="github"></i>
-                            </a>
-                            <a href="#" class="text-light-slate hover:text-green transition">
-                                <i data-feather="external-link"></i>
-                            </a>
+                        <a href="https://www.moonnow.in/" target="_blank" rel="noopener noreferrer" class="btn-retro text-[10px] md:text-xs py-2 px-4 md:py-3 md:px-6 w-full md:w-auto">OPEN WEBSITE</a>
+                    </div>
+                </div>
+
+                <!-- Project 3: MKSS (Text Left, Preview Right) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center group">
+                    <div class="order-2 lg:order-1 border-thick p-6 md:p-8 bg-[#f4f1ea] relative mt-4 lg:mt-0">
+                        <div class="masking-tape tape-center"></div>
+                        <h4 class="text-xs md:text-sm font-bold bg-ink text-white inline-block px-2 mb-2">NGO PORTAL</h4>
+                        <h3 class="text-3xl md:text-4xl font-display mb-3 break-all">MKSSINDIA.ORG</h3>
+                        <p class="font-mono text-xs md:text-sm mb-5 text-justify">
+                            Organizational website optimized for high availability. Handled Google Search Console setup and maintained secure DNS records for reliable access.
+                        </p>
+                        <div class="border-t-2 border-dashed border-ink pt-3 mb-5 flex flex-wrap gap-3 text-[10px] md:text-xs font-bold font-sub uppercase">
+                            <span>WEB DEV</span> <span>SEO</span> <span>DEPLOYMENT</span>
+                        </div>
+                        <a href="https://mkssindia.org/" target="_blank" rel="noopener noreferrer" class="btn-retro text-[10px] md:text-xs py-2 px-4 md:py-3 md:px-6 w-full md:w-auto">OPEN WEBSITE</a>
+                    </div>
+
+                    <!-- Live Preview -->
+                    <div class="order-1 lg:order-2 rotate-1 md:rotate-2 block">
+                        <div class="browser-mockup w-full">
+                            <div class="browser-header">
+                                <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+                            </div>
+                            <div class="preview-container">
+                                <iframe src="https://mkssindia.org/" class="live-iframe pointer-events-none" title="MKSS Live Preview" loading="lazy"></iframe>
+                                <div class="sepia-overlay"></div>
+                                <a href="https://mkssindia.org/" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10" aria-label="Visit MKSS"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Backend & Internal Tools Grid -->
+                <div class="col-span-1 mt-10 md:mt-16">
+                    <h3 class="text-2xl md:text-3xl font-display mb-6 md:mb-8 border-b-2 border-dashed border-ink inline-block">INTERNAL & BACKEND SYSTEMS</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        <!-- Order Execution Engine -->
+                        <div class="border-thick p-5 md:p-6 bg-[#fbf6f0] relative mt-4 hover:-translate-y-2 transition-transform flex flex-col justify-between">
+                            <div>
+                                <div class="absolute -top-3 md:-top-4 left-0 bg-ink text-white px-3 md:px-4 py-1 font-sub uppercase text-[10px] md:text-xs">
+                                    BACKEND
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-display mt-2 mb-2">ORDER EXECUTION ENGINE</h3>
+                                <p class="font-sub font-bold text-accent-red mb-3 text-[10px] md:text-xs">JAVA • REACT • TYPESCRIPT</p>
+                                <p class="font-mono text-xs mb-2 text-justify">
+                                    Architected an event-driven backend system using Java multithreading for concurrent order processing with in-memory queues, retry logic, and transactional handling.
+                                </p>
+                                <p class="font-mono text-xs mb-4 text-justify">
+                                    Built a React + TypeScript interface for order simulation and API interaction.
+                                </p>
+                            </div>
+                            <p class="font-sub font-bold text-[9px] md:text-[10px] text-ink/60 uppercase tracking-widest border-t border-ink/20 pt-2">
+                                Stack: Java, Concurrency, React, TS, REST APIs
+                            </p>
+                        </div>
+
+                        <!-- Honorarium System -->
+                        <div class="border-thick p-5 md:p-6 bg-[#fbf6f0] relative mt-4 hover:-translate-y-2 transition-transform flex flex-col justify-between">
+                            <div>
+                                <div class="absolute -top-3 md:-top-4 left-0 bg-ink text-white px-3 md:px-4 py-1 font-sub uppercase text-[10px] md:text-xs">
+                                    GOVT PROJECT
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-display mt-2 mb-2">HONORARIUM SYSTEM</h3>
+                                <p class="font-sub font-bold text-accent-red mb-3 text-[10px] md:text-xs">SPRING BOOT • POSTGRESQL • RBAC</p>
+                                <p class="font-mono text-xs mb-2 text-justify">
+                                    Designed and deployed a robust backend workflow system for 1000+ officials using Spring Boot and REST APIs.
+                                </p>
+                                <p class="font-mono text-xs mb-4 text-justify">
+                                    Built role-based approval flows (RBAC), integrated authentication, and managed transaction processing using JPA/Hibernate.
+                                </p>
+                            </div>
+                            <p class="font-sub font-bold text-[9px] md:text-[10px] text-ink/60 uppercase tracking-widest border-t border-ink/20 pt-2">
+                                Stack: Spring Boot, PostgreSQL, JPA/Hibernate, RBAC
+                            </p>
+                        </div>
+
+                        <!-- Anti-Theft System -->
+                        <div class="border-thick p-5 md:p-6 bg-[#fbf6f0] relative mt-4 hover:-translate-y-2 transition-transform flex flex-col justify-between">
+                            <div>
+                                <div class="absolute -top-3 md:-top-4 left-0 bg-ink text-white px-3 md:px-4 py-1 font-sub uppercase text-[10px] md:text-xs">
+                                    PATENTED
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-display mt-2 mb-2">ANTI-THEFT IOT SYSTEM</h3>
+                                <p class="font-sub font-bold text-accent-red mb-3 text-[10px] md:text-xs">IOT • ANDROID • EMBEDDED</p>
+                                <p class="font-mono text-xs mb-2 text-justify">
+                                    Published patent (No. 202411093785 A) for a Bluetooth-based anti-theft tracking system enabling real-time device monitoring and alerts.
+                                </p>
+                                <p class="font-mono text-xs mb-4 text-justify">
+                                    Ongoing development project with the MNIT Jaipur team, enhancing hardware–software integration and mobile app control.
+                                </p>
+                            </div>
+                            <p class="font-sub font-bold text-[9px] md:text-[10px] text-ink/60 uppercase tracking-widest border-t border-ink/20 pt-2">
+                                Stack: IoT Modules, Bluetooth, Embedded, Android Dev
+                            </p>
+                        </div>
+
+                        <!-- Agri_Connect - v6 -->
+                        <div class="border-thick p-5 md:p-6 bg-[#fbf6f0] relative mt-4 hover:-translate-y-2 transition-transform flex flex-col justify-between">
+                            <div>
+                                <div class="absolute -top-3 md:-top-4 left-0 bg-ink text-white px-3 md:px-4 py-1 font-sub uppercase text-[10px] md:text-xs">
+                                    AI PLATFORM
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-display mt-2 mb-2">AGRI_CONNECT - V6</h3>
+                                <p class="font-sub font-bold text-accent-red mb-3 text-[10px] md:text-xs">SPRING BOOT • DIALOGFLOW</p>
+                                <p class="font-mono text-xs mb-4 text-justify">
+                                    A full-stack AI-powered platform built for farmers of Kerala (SIH 2025), providing instant agricultural query resolution, crop guidance, and support through intelligent backend services.
+                                </p>
+                            </div>
+                            <p class="font-sub font-bold text-[9px] md:text-[10px] text-ink/60 uppercase tracking-widest border-t border-ink/20 pt-2">
+                                Stack: Spring Boot, PostgreSQL, Dialogflow, Next.js
+                            </p>
+                        </div>
+
+                        <!-- E-Book Store -->
+                        <div class="border-thick p-5 md:p-6 bg-[#fbf6f0] relative mt-4 hover:-translate-y-2 transition-transform flex flex-col justify-between">
+                            <div>
+                                <div class="absolute -top-3 md:-top-4 left-0 bg-ink text-white px-3 md:px-4 py-1 font-sub uppercase text-[10px] md:text-xs">
+                                    FULL-STACK
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-display mt-2 mb-2">E-BOOK STORE</h3>
+                                <p class="font-sub font-bold text-accent-red mb-3 text-[10px] md:text-xs">SPRING BOOT • POSTGRESQL</p>
+                                <p class="font-mono text-xs mb-4 text-justify">
+                                    A scalable full-stack bookstore system featuring secure authentication, an interactive admin dashboard, and an integrated online payment gateway for seamless processing.
+                                </p>
+                            </div>
+                            <p class="font-sub font-bold text-[9px] md:text-[10px] text-ink/60 uppercase tracking-widest border-t border-ink/20 pt-2">
+                                Stack: Spring Boot, Spring Security, Payments, REST APIs
+                            </p>
+                        </div>
+
+                        <!-- Job Portal -->
+                        <div class="border-thick p-5 md:p-6 bg-[#fbf6f0] relative mt-4 hover:-translate-y-2 transition-transform flex flex-col justify-between">
+                            <div>
+                                <div class="absolute -top-3 md:-top-4 left-0 bg-ink text-white px-3 md:px-4 py-1 font-sub uppercase text-[10px] md:text-xs">
+                                    WEB APP
+                                </div>
+                                <h3 class="text-xl md:text-2xl font-display mt-2 mb-2">JOB PORTAL SYSTEM</h3>
+                                <p class="font-sub font-bold text-accent-red mb-3 text-[10px] md:text-xs">SPRING BOOT • THYMELEAF</p>
+                                <p class="font-mono text-xs mb-4 text-justify">
+                                    A comprehensive job portal application enabling job search, application tracking, and profile management, along with a dedicated employer admin panel.
+                                </p>
+                            </div>
+                            <p class="font-sub font-bold text-[9px] md:text-[10px] text-ink/60 uppercase tracking-widest border-t border-ink/20 pt-2">
+                                Stack: Spring Boot, PostgreSQL, JPA/Hibernate, Security
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section id="achievements" class="py-12">
+            <div class="bg-ink text-[#eaddcf] p-6 md:p-12 lg:p-16 relative overflow-hidden">
+                <!-- Background Pattern -->
+                 <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
                 
-                <!-- Project 7: Job Portal (Shifted, was Project 6) -->
-                <div class="card-glass rounded-lg grid grid-cols-1 md:grid-cols-2 gap-6 items-center reveal overflow-visible">
-                    <div class="p-6">
-                        <!-- IMPORTANT FIX: Changed ID to match JS and removed src attribute which is set by JS -->
-                        <!-- Initial Placeholder/Loading State -->
-                        <img id="job-portal-image" 
-                            src="jobportal.jpg"
-                            alt="Job Portal Preview Loading" 
-                            class="project-image opacity-80 hover:opacity-100 transition-opacity flex items-center justify-center text-center">
-                    </div>
-                    <div class="p-6 text-left">
-                        <p class="font-fira text-sm text-green mb-1">Featured Project</p>
-                        <!-- Title size increased to text-3xl -->
-                        <h3 class="text-3xl font-bold text-lightest-slate mb-4">Job Portal</h3>
-                        <p class="mb-4">
-                            A comprehensive job portal built with Spring Boot, enabling users to search for jobs, apply, and manage their profiles, with a dedicated admin panel for employers.
+                <h2 class="text-4xl md:text-5xl font-display text-center mb-10 md:mb-12 relative z-10">MILESTONES & ACHIEVEMENTS</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 relative z-10 text-left">
+                    
+                    <!-- GSSoC -->
+                    <div class="border-2 border-[#eaddcf] p-5 md:p-6 hover:bg-[#eaddcf] hover:text-ink transition flex flex-col group">
+                        <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4 border-b border-[#eaddcf] group-hover:border-ink pb-3 md:pb-4">
+                            <i data-feather="users" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            <h4 class="text-xl md:text-2xl font-display leading-none">GSOC '25 CONTRIBUTOR</h4>
+                        </div>
+                        <p class="font-mono text-xs md:text-sm opacity-90 text-justify">
+                            Contributed to open-source projects prioritizing collaborative development and modern version control practices.
                         </p>
-                        
-                        <!-- SKILLS: Already using rounded pill format -->
-                        <div class="flex flex-wrap gap-2 justify-start mb-4">
-                            <span class="skill-pill">Spring Boot</span>
-                            <span class="skill-pill">Thymeleaf</span>
-                            <span class="skill-pill">Spring Security</span>
-                            <span class="skill-pill">REST API</span>
-                            <span class="skill-pill">PostgreSQL</span>
-                            <span class="skill-pill">JPA / Hibernate</span>
-                            <span class="skill-pill">Java 17</span>
-                        </div>
-                        
-                        <div class="flex items-center gap-4 justify-start">
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="github"></i></a>
-                            <a href="#" class="text-light-slate hover:text-green transition"><i data-feather="external-link"></i></a>
-                        </div>
                     </div>
+
+                    <!-- Patent -->
+                    <div class="border-2 border-[#eaddcf] p-5 md:p-6 hover:bg-[#eaddcf] hover:text-ink transition flex flex-col group">
+                        <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4 border-b border-[#eaddcf] group-hover:border-ink pb-3 md:pb-4">
+                            <i data-feather="award" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            <h4 class="text-xl md:text-2xl font-display leading-none">PATENT HOLDER</h4>
+                        </div>
+                        <p class="font-sub text-accent-red font-bold tracking-widest text-[10px] md:text-xs mb-2">PATENT NO. 202411093785 A</p>
+                        <p class="font-mono text-xs md:text-sm opacity-90 text-justify">
+                            Bluetooth-based Anti-Theft IoT System. Engineered a hardware–software integrated real-time tracking solution.
+                        </p>
+                    </div>
+
+                    <!-- 500+ DSA -->
+                    <div class="border-2 border-[#eaddcf] p-5 md:p-6 hover:bg-[#eaddcf] hover:text-ink transition flex flex-col group">
+                        <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4 border-b border-[#eaddcf] group-hover:border-ink pb-3 md:pb-4">
+                            <i data-feather="code" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            <h4 class="text-xl md:text-2xl font-display leading-none">500+ DSA PROBLEMS</h4>
+                        </div>
+                        <p class="font-mono text-xs md:text-sm opacity-90 text-justify">
+                            Solved 500+ problems on LeetCode covering Arrays, Trees, Graphs, Dynamic Programming, Backtracking, and System Design fundamentals.
+                        </p>
+                    </div>
+
+                    <!-- Deployments -->
+                    <div class="border-2 border-[#eaddcf] p-5 md:p-6 hover:bg-[#eaddcf] hover:text-ink transition flex flex-col group">
+                        <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4 border-b border-[#eaddcf] group-hover:border-ink pb-3 md:pb-4">
+                            <i data-feather="server" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            <h4 class="text-xl md:text-2xl font-display leading-none">LIVE DEPLOYMENTS</h4>
+                        </div>
+                        <p class="font-mono text-xs md:text-sm opacity-90 text-justify">
+                            Successfully deployed and managed live platforms including e-commerce and enterprise systems with Linux, SSL, DNS, and CI/CD workflows.
+                        </p>
+                    </div>
+
+                    <!-- AI Integration -->
+                    <div class="border-2 border-[#eaddcf] p-5 md:p-6 hover:bg-[#eaddcf] hover:text-ink transition flex flex-col group">
+                        <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4 border-b border-[#eaddcf] group-hover:border-ink pb-3 md:pb-4">
+                            <i data-feather="cpu" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            <h4 class="text-xl md:text-2xl font-display leading-none">AI INTEGRATION</h4>
+                        </div>
+                        <p class="font-mono text-xs md:text-sm opacity-90 text-justify">
+                            Integrated Dialogflow AI chatbot logic into full-stack applications to provide intelligent, automated query resolution.
+                        </p>
+                    </div>
+
+                    <!-- Full-Stack -->
+                    <div class="border-2 border-[#eaddcf] p-5 md:p-6 hover:bg-[#eaddcf] hover:text-ink transition flex flex-col group">
+                        <div class="flex items-center gap-3 md:gap-4 mb-3 md:mb-4 border-b border-[#eaddcf] group-hover:border-ink pb-3 md:pb-4">
+                            <i data-feather="layout" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            <h4 class="text-xl md:text-2xl font-display leading-none">FULL-STACK ENGINEER</h4>
+                        </div>
+                        <p class="font-mono text-xs md:text-sm opacity-90 text-justify">
+                            Built and deployed scalable backend systems utilizing Spring Boot, PostgreSQL, and REST APIs, paired with modern front-end interfaces.
+                        </p>
+                    </div>
+
+                    <!-- Backend Design -->
+                    <div class="border-2 border-[#eaddcf] p-5 md:p-6 hover:bg-[#eaddcf] hover:text-ink transition flex flex-col group sm:col-span-2 lg:col-span-3">
+                        <div class="flex items-center justify-center gap-3 md:gap-4 mb-3 md:mb-4 border-b border-[#eaddcf] group-hover:border-ink pb-3 md:pb-4">
+                            <i data-feather="database" class="w-6 h-6 md:w-8 md:h-8"></i>
+                            <h4 class="text-xl md:text-2xl font-display leading-none text-center">BACKEND SYSTEM ARCHITECTURE</h4>
+                        </div>
+                        <p class="font-mono text-xs md:text-sm opacity-90 text-center max-w-3xl mx-auto">
+                            Designed robust, concurrent, and event-driven backend systems leveraging Java multithreading and queue-based processing paradigms.
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Achievements Section -->
-        <section id="achievements" class="py-24 reveal">
-            <h2 class="section-heading text-3xl font-bold text-lightest-slate mb-12 flex items-center after:content-[''] after:block after:h-px after:w-full after:bg-light-navy after:ml-4">
-                My Achievements
-            </h2>
-             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <!-- Achievement 1 (NEW: wowwoolies Deployment) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="shopping-bag" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">E-Commerce Deployment</h3>
-                    <p class="text-sm">Deployed and managed **wowwoolies.co.in** for secure, nationwide transactions (an E-commerce website) (Oct 2025).</p>
+        <!-- Contact -->
+        <section id="contact" class="py-16 md:py-24 text-center">
+            <div class="max-w-3xl mx-auto border-dashed p-6 md:p-8">
+                <h2 class="text-5xl md:text-6xl font-display mb-4 md:mb-6">GET IN TOUCH</h2>
+                <p class="font-mono text-sm md:text-lg mb-6 md:mb-8 max-w-xl mx-auto px-4">
+                    I am actively seeking new opportunities. Feel free to reach out to discuss how I can contribute to your engineering team.
+                    <br><br>
+                    <span class="bg-yellow-200 px-1 md:px-2 text-ink font-bold">Email:</span> <a href="mailto:aniketpatel4p@gmail.com" class="font-bold hover:text-accent-red underline decoration-2 underline-offset-4 transition break-all">aniketpatel4p@gmail.com</a>
+                </p>
+                <div class="inline-block relative w-full sm:w-auto px-4 sm:px-0">
+                    <div class="masking-tape hidden md:block" style="top: -20px; right: -20px; width: 60px; transform: rotate(45deg);"></div>
+                    <a href="mailto:aniketpatel4p@gmail.com" class="btn-retro text-lg md:text-xl py-4 px-8 md:px-12 w-full md:w-auto">
+                        INITIATE CONTACT
+                    </a>
                 </div>
-                <!-- Achievement 2 (NEW: NIC Deployment) -->
-                <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="server" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">NIC Internal Live Application</h3>
-                    <p class="text-sm">Independently designed and deployed a full-stack workflow application on the **NIC network (MeitY)**.</p>
-                </div>
-                <!-- Achievement 3 (mkssindia) -->
-                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="globe" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Live Website Deployment</h3>
-                    <p class="text-sm">Deployed and manage mkssindia.org, ensuring high availability and SEO.</p>
-                 </div>
-                <!-- Achievement 4 (Patent) -->
-                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="award" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Patent Published</h3>
-                    <p class="text-sm">For a "**Bluetooth Anti-Theft System**" (No. 202411093785 A).</p>
-                 </div>
-                <!-- Achievement 5 (DSA) -->
-                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="code" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">500+ LeetCode Problems</h3>
-                    <p class="text-sm">Specializing in dynamic programming, graphs, and binary trees.</p>
-                 </div>
-                <!-- Achievement 6 (GSoC) - UPDATED YEAR -->
-                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="users" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">GSoC 2025 Contributor</h3>
-                    <p class="text-sm">Contributed to open-source with GirlScript Summer of Code.</p>
-                 </div>
-                <!-- Achievement 7 (Top 2% Finalist) -->
-                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center">
-                    <i data-feather="bar-chart-2" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Top 2% Finalist</h3>
-                    <p class="text-sm">In the Flipkart GRID 2.0 System Design Challenge.</p>
-                 </div>
-                <!-- Achievement 8 (Coding Ninjas) -->
-                 <div class="card-glass p-6 rounded-lg text-center flex flex-col items-center justify-center min-h-[190px]">
-                    <i data-feather="trending-up" class="w-12 h-12 text-green mb-4"></i>
-                    <h3 class="font-semibold text-lightest-slate mb-2">Ranked 7th on Coding Ninjas</h3>
-                    <p class="text-sm">Achieved top ranking on the leaderboard in October 2024.</p>
-                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-24 text-center reveal">
-             <h2 class="section-heading text-3xl font-bold text-lightest-slate mb-4 flex items-center justify-center after:content-[''] after:hidden sm:after:block after:h-px after:w-24 md:after:w-48 after:bg-light-navy after:ml-4 before:mr-4 before:hidden sm:before:block before:content-[''] before:h-px before:w-24 md:before:w-48 before:bg-light-navy">
-                Get In Touch
-            </h2>
-            <p class="max-w-xl mx-auto mb-8">
-                I'm currently seeking new opportunities and my inbox is always open. Whether you have a question or just want to say hi, I'll do my best to get back to you!
-            </p>
-            <a href="mailto:aniketpatel4p@gmail.com" class="font-fira text-green border border-green rounded-md px-8 py-4 btn-radial-fill inline-block">
-                Say Hello
-            </a>
-        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-8">
-        <div class="container mx-auto px-6 text-center">
-             <!-- NEW TAGLINE -->
-             <p class="font-fira text-lg text-green mb-4">Crafting future-ready code and ideas.</p>
-             <!-- Mobile Social Icons -->
-             <div class="flex md:hidden justify-center space-x-6 mb-4">
-                <a href="https://github.com/anikettP" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="github" class="w-6 h-6"></i></a>
-                <a href="https://linkedin.com/in/aniketpatel23" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="linkedin" class="w-6 h-6"></i></a>
-                <a href="https://leetcode.com/aniketpatel_23/" target="_blank" rel="noopener noreferrer" class="text-slate hover:text-green transition"><i data-feather="codesandbox" class="w-6 h-6"></i></a>
+    <footer class="bg-ink text-[#eaddcf] py-10 md:py-12 text-center border-t-8 border-accent-red">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center gap-6 md:gap-8 mb-6">
+                <a href="mailto:aniketpatel4p@gmail.com" class="hover:text-accent-red transition-transform hover:scale-110" aria-label="Email"><i data-feather="mail"></i></a>
+                <a href="https://github.com/anikettP" target="_blank" rel="noopener noreferrer" class="hover:text-accent-red transition-transform hover:scale-110" aria-label="GitHub"><i data-feather="github"></i></a>
+                <a href="https://www.linkedin.com/in/aniket-patel-a4977224b/" target="_blank" rel="noopener noreferrer" class="hover:text-accent-red transition-transform hover:scale-110" aria-label="LinkedIn"><i data-feather="linkedin"></i></a>
+                <a href="https://leetcode.com/u/aniketpatel_23/" target="_blank" rel="noopener noreferrer" class="hover:text-accent-red transition-transform hover:scale-110" aria-label="LeetCode" title="LeetCode"><i data-feather="code"></i></a>
             </div>
-            <p class="font-fira text-sm text-slate">&copy; 2025 Designed & Built by Aniket Patel.</p>
+            <p class="font-mono text-xs md:text-sm uppercase tracking-widest opacity-60">
+                &copy; 2025 Aniket Patel. Software Engineer.
+            </p>
         </div>
     </footer>
     
     <script>
-        // Define a Particle class for the splash effect
-        class Particle {
-            constructor(x, y, color) {
-                this.x = x;
-                this.y = y;
-                this.radius = Math.random() * 2 + 0.5;
-                this.color = color;
-                // Random velocity for the 'splash' effect
-                this.velocity = {
-                    x: (Math.random() - 0.5) * (Math.random() * 5),
-                    y: (Math.random() - 0.5) * (Math.random() * 5)
-                };
-                this.alpha = 1;
-                this.friction = 0.95; // Slow down over time
-            }
+        // Init Feather Icons
+        feather.replace();
 
-            draw(ctx) {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-                ctx.restore();
-            }
+        // Mobile Menu Toggle logic
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.nav-link, .mobile-nav-link');
 
-            update(ctx) {
-                this.velocity.x *= this.friction;
-                this.velocity.y *= this.friction;
-                this.x += this.velocity.x;
-                this.y += this.velocity.y;
-                this.alpha -= 0.02; // Fade out quickly
-                this.draw(ctx);
+        function toggleMenu() {
+            menu.classList.toggle('hidden');
+            if(!menu.classList.contains('hidden')) {
+                document.body.style.overflow = 'hidden'; // prevent scrolling when menu is open
+            } else {
+                document.body.style.overflow = '';
             }
         }
 
-        // --- Image Generation Logic for Job Portal ---
-        const apiKey = "";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
-
-        // Function to handle exponential backoff for API calls
-        async function fetchWithRetry(url, options, retries = 5) {
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url, options);
-                    if (!response.ok) {
-                         // Throw error for non-successful status codes
-                         const errorBody = await response.text();
-                         throw new Error(`API call failed with status ${response.status}: ${errorBody}`);
-                    }
-                    return response;
-                } catch (error) {
-                    if (i < retries - 1) {
-                        const delay = Math.pow(2, i) * 1000; // Exponential delay: 1s, 2s, 4s, 8s, 16s
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                    } else {
-                        // Throw the error if all retries fail
-                        throw error;
-                    }
-                }
-            }
-        }
-
-
-        async function generateJobPortalImage() {
-            // FIX: Ensure the correct ID is targeted
-            const imageElement = document.getElementById('job-portal-image'); 
-            
-            // Initial check for loading state
-            if (imageElement.src.includes("Generating+Image")) {
-                 imageElement.alt = "Generating Job Portal Dashboard Preview...";
-                 // Added subtle glow for the loading placeholder to match theme
-                 imageElement.style.boxShadow = '0 0 10px rgba(100, 255, 218, 0.5)';
-            }
-
-            // Define the prompt for a clean, tech-focused job portal dashboard
-            const prompt = "Minimalist job portal dashboard interface, displaying job listings, search bar, and user profile icon. Use a dark blue and bright green (teal) color scheme. Clean UI/UX design. High-resolution screenshot mockup.";
-
-            const payload = { 
-                instances: [{ prompt: prompt }], 
-                parameters: { "sampleCount": 1 } 
-            };
-
-            try {
-                const response = await fetchWithRetry(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-                
-                if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
-                    const base64Data = result.predictions[0].bytesBase64Encoded;
-                    const imageUrl = `data:image/png;base64,${base64Data}`;
-                    imageElement.src = imageUrl;
-                    imageElement.alt = "Generated Job Portal Dashboard Preview";
-                    imageElement.style.boxShadow = ''; // Remove glow on success
-                } else {
-                    console.error("Image generation failed:", result);
-                    imageElement.src = "https://placehold.co/600x300/FF0000/FFFFFF?text=Image+Generation+Failed";
-                    imageElement.alt = "Error loading image preview.";
-                    imageElement.style.boxShadow = '';
-                }
-
-            } catch (error) {
-                console.error("Error generating image:", error);
-                imageElement.src = "https://placehold.co/600x300/FF0000/FFFFFF?text=API+Error";
-                imageElement.alt = "Error loading image preview.";
-                imageElement.style.boxShadow = '';
-            }
-        }
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            feather.replace();
-
-            // --- Canvas and Context setup ---
-            const canvas = document.getElementById('stars-canvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            
-            // --- Starfield logic ---
-            let stars;
-            const numStars = 300;
-            const starSpeed = 0.5;
-
-            function initStars() {
-                if (!canvas) return;
-                // FIX: Ensure canvas is always set to full viewport size for responsiveness
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                stars = [];
-                for (let i = 0; i < numStars; i++) {
-                    stars.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        radius: Math.random() * 1.2,
-                        alpha: Math.random(),
-                        deltaAlpha: Math.random() * 0.02 - 0.01
-                    });
-                }
-            }
-
-            // --- Particle Splash Event Listener ---
-            window.addEventListener('mousemove', (e) => {
-                // Throttle particle creation (only generate particles every 3 mouse movements)
-                if (e.movementX % 3 === 0 || e.movementY % 3 === 0) {
-                    for (let i = 0; i < 5; i++) {
-                        const color = Math.random() < 0.5 ? 'rgba(100, 255, 218, 1)' : 'rgba(255, 255, 255, 1)';
-                        particles.push(new Particle(e.clientX, e.clientY, color));
-                    }
-                }
-            });
-            // Handle touch input for particle effect on mobile
-            canvas.addEventListener('touchmove', (e) => {
-                if (e.touches.length > 0) {
-                    const touch = e.touches[0];
-                    for (let i = 0; i < 5; i++) {
-                        const color = Math.random() < 0.5 ? 'rgba(100, 255, 218, 1)' : 'rgba(255, 255, 255, 1)';
-                        particles.push(new Particle(touch.clientX, touch.clientY, color));
-                    }
-                    e.preventDefault(); // Prevent scrolling while touching canvas
-                }
-            });
-
-            // --- Animation Loop ---
-            function animate() {
-                requestAnimationFrame(animate);
-
-                // 1. Clear the screen with a faint trail effect for stars
-                ctx.fillStyle = 'rgba(2, 12, 27, 0.15)'; 
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                // 2. Update and draw stars
-                for (const star of stars) {
-                    star.y += starSpeed;
-                    if (star.y > canvas.height) {
-                        star.y = 0;
-                        star.x = Math.random() * canvas.width;
-                    }
-                    star.alpha += star.deltaAlpha;
-                    if (star.alpha <= 0 || star.alpha >= 1) {
-                        star.deltaAlpha = -star.deltaAlpha;
-                    }
-                    star.alpha = Math.max(0, Math.min(1, star.alpha));
-                    
-                    ctx.beginPath();
-                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-                    ctx.fill();
-                }
-
-                // 3. Update and draw particles (the splash effect)
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const particle = particles[i];
-                    particle.update(ctx);
-                    if (particle.alpha <= 0 || particle.radius < 0.1) {
-                        particles.splice(i, 1); // Remove faded particles
-                    }
-                }
-            }
-            
-            // --- Initialization ---
-            const preloader = document.getElementById('preloader');
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    preloader.classList.add('hidden');
-                }, 500); 
-            });
-
-            // Trigger Image Generation on load
-            generateJobPortalImage();
-
-
-            // Typing effect logic remains the same
-            const typingTextElement = document.getElementById('typing-text');
-            const textToType = "I build things for the web.";
-            let charIndex = 0;
-            
-            function type() {
-                if (charIndex < textToType.length) {
-                    typingTextElement.textContent += textToType.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(type, 100);
-                }
-            }
-            setTimeout(type, 600);
-
-            // --- Event Listeners and Startup ---
-            initStars();
-            animate();
-            window.addEventListener('resize', initStars);
-
-            // Interaction logic (keeping logic simple for cursor pointer)
-            const interactiveElements = document.querySelectorAll('a, button, .card-glass');
-
-            interactiveElements.forEach(el => {
-                // Mouse hover events (keeping logic simple for cursor pointer)
-                el.addEventListener('mouseover', () => { el.style.zIndex = 101; });
-                el.addEventListener('mouseout', () => { el.style.zIndex = ''; });
-                el.addEventListener('touchstart', () => { el.style.zIndex = 101; });
-                el.addEventListener('touchend', () => { setTimeout(() => { el.style.zIndex = ''; }, 200); });
-            });
-
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled', 'bg-dark-navy/80', 'backdrop-blur-sm', 'shadow-lg');
-                } else {
-                    navbar.classList.remove('scrolled', 'bg-dark-navy/80', 'backdrop-blur-sm', 'shadow-lg');
-                }
-            });
-
-            // Mobile menu logic remains the same
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const body = document.body;
-
-            mobileMenuButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                mobileMenu.classList.toggle('hidden');
-                mobileMenuButton.innerHTML = mobileMenu.classList.contains('hidden') ? '<i data-feather="menu" class="w-6 h-6"></i>' : '<i data-feather="x" class="w-6 h-6"></i>';
-                feather.replace();
-                body.classList.toggle('overflow-hidden');
-            });
-            
-            document.querySelectorAll('#mobile-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuButton.innerHTML = '<i data-feather="menu" class="w-6 h-6"></i>';
-                    feather.replace();
-                    body.classList.remove('overflow-hidden');
-                });
-            });
-
-            // Dynamic Staggered Reveal logic remains the same
-            const revealElements = document.querySelectorAll('.reveal');
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            });
-
-            revealElements.forEach((el, index) => {
-                el.style.setProperty('--delay', (index * 0.08) + 's');
-                revealObserver.observe(el);
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        
+        // Close menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                 if (!menu.classList.contains('hidden')) {
+                     toggleMenu();
+                 }
             });
         });
     </script>
